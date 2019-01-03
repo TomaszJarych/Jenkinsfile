@@ -17,7 +17,7 @@ pipeline{
         }
         stage('Deploy to staging'){
             steps{
-                copyArtifacts(upstream);
+                copyArtifacts(projectName:'pipeline-from-Jenkinsfile', upstream);
                 build job: 'deploy-to-staging'
             }
         }
