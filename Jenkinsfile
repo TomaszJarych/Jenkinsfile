@@ -17,7 +17,7 @@ pipeline{
         }
         stage('Deploy to staging'){
             steps{
-                copyArtifacts projectName: 'Build', selector: lastSuccessful()
+                copyArtifacts filter: '**/*.war', projectName: 'pipeline-from-Jenkinsfile', selector: upstream()
                 build job: 'deploy-to-staging'
             }
         }
@@ -27,7 +27,7 @@ pipeline{
                     input message:'Approve PRODUCTION Deployment?'
                 }
 
-                copyArtifacts projectName: 'Build', selector: lastSuccessful()
+                copyArtifacts filter: '**/*.war', projectName: 'pipeline-from-Jenkinsfile', selector: upstream()
                 build job: 'deploy-to-prod'
             }
             post {
