@@ -17,6 +17,8 @@ pipeline{
         }
         stage('Deploy to staging'){
             steps{
+                def built = build('upstream')
+                copyArtifacts(upstream);
                 build job: 'deploy-to-staging'
             }
         }
